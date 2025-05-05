@@ -3,12 +3,30 @@ import isaac from '../assets/isaac.jpg'
 import raj from '../assets/raj.jpg'
 import rick from '../assets/rick.jpg'
 import { RouterLink } from 'vue-router'
+import { ref, onMounted } from 'vue'
+
+const coins = ['BTC', 'ETH', 'DOGE']
+const prices = ref({})
+
+const fetchPrices = async () => {
+  for (const coin of coins) {
+    try {
+      const res = await fetch(`https://api.coinbase.com/v2/prices/${coin}-USD/spot`)
+      const data = await res.json()
+      prices.value[coin] = parseFloat(data.data.amount).toFixed(2)
+    } catch (error) {
+      prices.value[coin] = 'Error'
+    }
+  }
+}
+
+onMounted(fetchPrices)
 </script>
 
 <template>
   <main class="mainpage">
-    <v-container class="app">
-      <v-container class="home flex flex-row align-center justify-center text-center">
+    <v-container class="app" fluid>
+      <v-container class="home flex flex-row align-center justify-center text-center" fluid>
         <v-text class="title text-h3 font-weight-bold text-center"> Meet the Interns! </v-text>
         <v-row class="flex flex-row align-center justify-center space-evenly ma-10">
           <div class="container-avatar mx-auto mt-3">
@@ -51,15 +69,37 @@ import { RouterLink } from 'vue-router'
             </div>
           </div>
         </v-row>
-        <br />
-        <br />
-        <v-text class="title text-h3 font-weight-bold text-center"> Reach out to us! </v-text>
       </v-container>
+      <div class="crypto-prices">
+        <h2>📈 Live Crypto Prices</h2>
+        <ul>
+          <li v-for="coin in coins" :key="coin">
+            {{ coin }}: {{ prices[coin] || 'Loading...' }} USD
+          </li>
+        </ul>
+        <v-btn @click="fetchPrices" color="primary">Refresh</v-btn>
+      </div>
     </v-container>
   </main>
 </template>
 
 <style scoped>
+.crypto-prices {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
 .container-avatar {
   padding-top: 1rem;
   padding-left: 2rem;
@@ -85,8 +125,6 @@ import { RouterLink } from 'vue-router'
 
 .mainpage {
   font-family: 'DM Sans', sans-serif;
-  width: 100vw;
-  height: 100vh;
   background: #f5f7fa;
   background-position: center;
   background-repeat: no-repeat;
