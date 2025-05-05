@@ -45,12 +45,6 @@ import avatar from '../assets/isaac.jpg'
           <p>Details about project 2.</p>
         </v-card-text>
       </v-card>
-      <v-card class="my-5" max-width="400">
-        <v-card-title>Project 3</v-card-title>
-        <v-card-text>
-          <p>Details about project 3.</p>
-        </v-card-text>
-      </v-card>
     </v-card-text>
   </v-card>
 

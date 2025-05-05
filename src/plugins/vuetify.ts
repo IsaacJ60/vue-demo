@@ -8,6 +8,20 @@ import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
 export default createVuetify({
+  theme: {
+    defaultTheme: 'myTheme',
+    themes: {
+      myTheme: {
+        dark: false,
+        colors: {
+          // your colors...
+        },
+        variables: {
+          'font-family': 'DM Sans, sans-serif',
+        },
+      },
+    },
+  },
   icons: {
     defaultSet: 'mdi', // Specify the icon set
     aliases,
