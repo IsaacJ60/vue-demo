@@ -70,10 +70,10 @@
             dark
             variant="elevated"
             class="social-btn"
-            href="http://www.linkedin.com/in/rshah9"
+            href="https://www.rajshah.live"
             target="_blank"
           >
-            <v-icon start>mdi-linkedin</v-icon> LinkedIn
+            <v-icon start>mdi-account</v-icon> Website
           </v-btn>
           <v-btn
             color="blue accent-4"
