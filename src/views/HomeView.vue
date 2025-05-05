@@ -1,10 +1,14 @@
 <script setup lang="ts">
+// routes
 import isaac from '../assets/isaac.jpg'
 import raj from '../assets/raj.jpg'
 import rick from '../assets/rick.jpg'
 import { RouterLink } from 'vue-router'
 import { ref, onMounted } from 'vue'
-
+// theme toggle
+import { useThemeStore } from '@/stores/themeStore'
+const theme = useThemeStore()
+// crypto price api endpoint
 const coins = ['BTC', 'ETH', 'DOGE']
 const prices = ref({})
 
@@ -24,7 +28,7 @@ onMounted(fetchPrices)
 </script>
 
 <template>
-  <main class="mainpage">
+  <main :class="['mainpage', theme.darkMode ? 'dark-theme' : 'light-theme']">
     <v-container class="app" fluid>
       <v-container class="home flex flex-row align-center justify-center text-center" fluid>
         <v-text class="title text-h3 font-weight-bold text-center"> Meet the Interns! </v-text>
@@ -84,6 +88,7 @@ onMounted(fetchPrices)
 </template>
 
 <style scoped>
+/* light theme */
 .crypto-prices {
   background-color: white;
   border-radius: 10px;
@@ -150,5 +155,18 @@ li {
 
 .outlined-avatar.round {
   border-radius: 50%;
+}
+
+/* dark theme */
+.dark-theme {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+.dark-theme .container-avatar,
+.dark-theme .crypto-card {
+  background-color: #1e1e1e;
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 </style>
