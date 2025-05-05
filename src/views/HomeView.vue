@@ -28,7 +28,7 @@ onMounted(fetchPrices)
 </script>
 
 <template>
-  <main :class="['mainpage', theme.darkMode ? 'dark-theme' : 'light-theme']">
+  <main :class="['mainpage', theme.darkMode ? 'light-theme': 'dark-theme']">
     <v-container class="app" fluid>
       <v-container class="home flex flex-row align-center justify-center text-center" fluid>
         <v-text class="title text-h3 font-weight-bold text-center"> Meet the Interns! </v-text>

@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  // theme toggle
+  import { useThemeStore } from '@/stores/themeStore'
+  const theme = useThemeStore()
+</script>
 
 <template>
   <v-app class="app">
@@ -9,6 +13,13 @@
       >
 
       <v-spacer />
+
+
+      <!-- theme toggle -->
+      <v-btn @click="theme.toggleTheme" class="ml-4" variant="outlined" color="primary">
+        {{ theme.darkMode ? 'Dark' : 'Light' }}
+        Mode
+      </v-btn>
 
       <v-btn to="/" variant="elevated" class="nav-btn text-black ma-5" exact :ripple="false">
         Home
@@ -65,5 +76,20 @@ header {
 
 .nav-btn:hover {
   color: #ffffff;
+}
+
+/* dark theme */
+.dark-theme {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+
+/* dark theme */
+.dark-theme .container-avatar,
+.dark-theme .crypto-card {
+  background-color: #1e1e1e;
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 </style>
